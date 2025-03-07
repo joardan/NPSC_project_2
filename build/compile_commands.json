@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
+  "command": "/usr/bin/gcc  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -g -o CMakeFiles/glad.dir/glad/src/glad.c.o -c /mnt/Harddisk/GameEngine/Game_Engine/glad/src/glad.c",
+  "file": "/mnt/Harddisk/GameEngine/Game_Engine/glad/src/glad.c",
+  "output": "CMakeFiles/glad.dir/glad/src/glad.c.o"
+},
+{
+  "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
+  "command": "/usr/bin/g++  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OpenGL_Engine.dir/main.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/main.cpp",
+  "file": "/mnt/Harddisk/GameEngine/Game_Engine/main.cpp",
+  "output": "CMakeFiles/OpenGL_Engine.dir/main.cpp.o"
+}
+]
