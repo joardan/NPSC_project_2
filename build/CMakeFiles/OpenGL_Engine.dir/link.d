@@ -2,9 +2,10 @@ OpenGL_Engine: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o \
-  CMakeFiles/OpenGL_Engine.dir/main.cpp.o \
+  CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o \
   /usr/lib/libglfw.so.3.4 \
   libglad.a \
+  libstb_image.a \
   /usr/lib/libGLX.so \
   /usr/lib/libOpenGL.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/libstdc++.so \
@@ -51,11 +52,13 @@ OpenGL_Engine: \
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o:
 
-CMakeFiles/OpenGL_Engine.dir/main.cpp.o:
+CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o:
 
 /usr/lib/libglfw.so.3.4:
 
 libglad.a:
+
+libstb_image.a:
 
 /usr/lib/libGLX.so:
 

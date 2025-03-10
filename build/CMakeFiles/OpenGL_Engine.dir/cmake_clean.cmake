@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/OpenGL_Engine.dir/link.d"
-  "CMakeFiles/OpenGL_Engine.dir/main.cpp.o"
-  "CMakeFiles/OpenGL_Engine.dir/main.cpp.o.d"
+  "CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o"
+  "CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o.d"
   "OpenGL_Engine"
   "OpenGL_Engine.pdb"
 )

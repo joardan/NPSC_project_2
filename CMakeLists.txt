@@ -16,11 +16,17 @@ find_package(glfw3 REQUIRED)
 add_library(glad STATIC glad/src/glad.c)
 target_include_directories(glad PUBLIC glad/include)
 
-add_library(shader INTERFACE)
-target_include_directories(shader INTERFACE include)
+add_library(stb_image STATIC src/stb_image.cpp)
+target_include_directories(stb_image PUBLIC include)
+
+add_library(shader_functions INTERFACE)
+target_include_directories(shader_functions INTERFACE include)
+
+add_library(glm INTERFACE)
+target_include_directories(glm INTERFACE glm)
 
 # Add the executable
-add_executable(OpenGL_Engine main.cpp)
+add_executable(OpenGL_Engine src/main.cpp)
 
 # Link libraries
-target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL glad shader)
+target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL glad shader_functions stb_image glm)
