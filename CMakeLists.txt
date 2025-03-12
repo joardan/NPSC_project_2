@@ -25,8 +25,10 @@ target_include_directories(shader_functions INTERFACE include)
 add_library(glm INTERFACE)
 target_include_directories(glm INTERFACE glm)
 
+add_library(camera INTERFACE)
+target_include_directories(camera INTERFACE include glm)
 # Add the executable
 add_executable(OpenGL_Engine src/main.cpp)
 
 # Link libraries
-target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL glad shader_functions stb_image glm)
+target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL glad shader_functions stb_image glm camera)
