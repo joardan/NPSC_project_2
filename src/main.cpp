@@ -126,7 +126,7 @@ int main()
         glm::vec3(-1.3f,  1.0f, -1.5f)  
     };
 
-    Shader ourShader("../shaders/4.6.shader.vs", "../shaders/4.6.shader.fs");
+    Shader ourShader("../shaders/textured.box.shader.vs", "../shaders/textured.box.shader.fs");
 
     unsigned int VAO, VBO, EBO;
     glGenVertexArrays(1, &VAO);
@@ -142,7 +142,7 @@ int main()
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

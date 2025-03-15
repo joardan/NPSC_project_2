@@ -179,29 +179,29 @@ glad/src/glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/glad/src/glad.c.s
 .PHONY : glad/src/glad.c.s
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/main_light.o: src/main_light.cpp.o
+.PHONY : src/main_light.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/main_light.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o
+.PHONY : src/main_light.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/main_light.i: src/main_light.cpp.i
+.PHONY : src/main_light.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/main_light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.i
+.PHONY : src/main_light.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/main_light.s: src/main_light.cpp.s
+.PHONY : src/main_light.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/main_light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL_Engine.dir/build.make CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.s
+.PHONY : src/main_light.cpp.s
 
 src/stb_image.o: src/stb_image.cpp.o
 .PHONY : src/stb_image.o
@@ -241,9 +241,9 @@ help:
 	@echo "... glad/src/glad.o"
 	@echo "... glad/src/glad.i"
 	@echo "... glad/src/glad.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/main_light.o"
+	@echo "... src/main_light.i"
+	@echo "... src/main_light.s"
 	@echo "... src/stb_image.o"
 	@echo "... src/stb_image.i"
 	@echo "... src/stb_image.s"

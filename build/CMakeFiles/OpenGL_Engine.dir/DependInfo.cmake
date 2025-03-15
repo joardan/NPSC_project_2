@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp" "CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o" "gcc" "CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o.d"
+  "/mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp" "CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o" "gcc" "CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o.d"
   "" "OpenGL_Engine" "gcc" "CMakeFiles/OpenGL_Engine.dir/link.d"
   )
 

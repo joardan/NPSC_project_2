@@ -72,28 +72,28 @@ include CMakeFiles/OpenGL_Engine.dir/flags.make
 CMakeFiles/OpenGL_Engine.dir/codegen:
 .PHONY : CMakeFiles/OpenGL_Engine.dir/codegen
 
-CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o: CMakeFiles/OpenGL_Engine.dir/flags.make
-CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o: /mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp
-CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o: CMakeFiles/OpenGL_Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/Harddisk/GameEngine/Game_Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o -MF CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o.d -o CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp
+CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o: CMakeFiles/OpenGL_Engine.dir/flags.make
+CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o: /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp
+CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o: CMakeFiles/OpenGL_Engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/Harddisk/GameEngine/Game_Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -MF CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o.d -o CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp
 
-CMakeFiles/OpenGL_Engine.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OpenGL_Engine.dir/src/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp > CMakeFiles/OpenGL_Engine.dir/src/main.cpp.i
+CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp > CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.i
 
-CMakeFiles/OpenGL_Engine.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OpenGL_Engine.dir/src/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp -o CMakeFiles/OpenGL_Engine.dir/src/main.cpp.s
+CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp -o CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.s
 
 # Object files for target OpenGL_Engine
 OpenGL_Engine_OBJECTS = \
-"CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o"
+"CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o"
 
 # External object files for target OpenGL_Engine
 OpenGL_Engine_EXTERNAL_OBJECTS =
 
-OpenGL_Engine: CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o
+OpenGL_Engine: CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o
 OpenGL_Engine: CMakeFiles/OpenGL_Engine.dir/build.make
 OpenGL_Engine: CMakeFiles/OpenGL_Engine.dir/compiler_depend.ts
 OpenGL_Engine: /usr/lib/libglfw.so.3.4

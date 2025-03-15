@@ -13,8 +13,8 @@
 },
 {
   "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
-  "command": "/usr/bin/g++  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glm  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp",
-  "file": "/mnt/Harddisk/GameEngine/Game_Engine/src/main.cpp",
-  "output": "CMakeFiles/OpenGL_Engine.dir/src/main.cpp.o"
+  "command": "/usr/bin/g++  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glm  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp",
+  "file": "/mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp",
+  "output": "CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o"
 }
 ]
