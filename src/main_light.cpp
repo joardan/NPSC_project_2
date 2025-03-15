@@ -61,43 +61,42 @@ int main()
     Shader lightCubeShader("../shaders/light.cube.shader.vs", "../shaders/light.cube.shader.fs");
 
     float vertices[] = {
-        // Positions          // Texture Coords
         // Back face (z = -0.5)
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // Bottom-right
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // Top-right
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // Top-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  0.0f,  0.0f, -1.0f, 
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  0.0f,  0.0f, -1.0f, 
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,  0.0f,  0.0f, -1.0f, 
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  0.0f,  0.0f, -1.0f, 
     
-        // Front face (z = +0.5) — Corrected!
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // Bottom-left
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // Bottom-right
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // Top-right
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // Top-left
+        // Front face (z = +0.5)
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f, 
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f, 
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f, 
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f, 
     
         // Left face (x = -0.5)
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
-        -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // Bottom-right
-        -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // Top-right
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // Top-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f, 
+        -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f, 
+        -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f, 
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f, 
     
         // Right face (x = +0.5)
-         0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // Bottom-right
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // Top-right
-         0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // Top-left
+         0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f, 
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f, 
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  1.0f,  0.0f,  0.0f, 
+         0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f, 
     
         // Bottom face (y = -0.5)
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // Bottom-right
-         0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Top-right
-        -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, // Top-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f, 
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f, 
+         0.5f, -0.5f,  0.5f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f, 
+        -0.5f, -0.5f,  0.5f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f, 
     
-        // Top face (y = +0.5) with adjusted texture coordinates
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // Top-left in texture space
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // Top-right in texture space
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // Bottom-right in texture space
-        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // Bottom-left in texture space
-    };    
+        // Top face (y = +0.5)
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f, 
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,  0.0f,  1.0f,  0.0f, 
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,  0.0f,  1.0f,  0.0f, 
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,  0.0f,  1.0f,  0.0f  
+    };
     
     unsigned int indices[] = {
         // Back face
@@ -126,10 +125,12 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     unsigned int lightCubeVAO;
     glGenVertexArrays(1, &lightCubeVAO);
@@ -138,7 +139,7 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     while(!glfwWindowShouldClose(window))
@@ -155,11 +156,13 @@ int main()
         lightingShader.use();
         lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        lightingShader.setVec3("lightPos", lightPos);
         
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         lightingShader.setMat4("projection", projection);
         lightingShader.setMat4("view", view);
+        lightingShader.setVec3("viewPos", camera.Position);
 
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
