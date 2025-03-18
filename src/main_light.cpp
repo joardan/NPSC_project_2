@@ -191,14 +191,14 @@ int main()
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)windowedWidth / (float)windowedHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
-        glm::vec3 LightPos = glm::vec3(view * glm::vec4(lightPos, 1.0));
-        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
+        // glm::vec3 LightPos = glm::vec3(view * glm::vec4(lightPos, 1.0));
         // Set tranformations
         lightingShader.use();
         lightingShader.setMat4("projection", projection);
         lightingShader.setMat4("view", view);
         // Set lights
-        lightingShader.setVec3("light.position", lightPos); 	
+        lightingShader.setVec3("light.direction", 0.0f, 0.0f, -1.0f);
+        lightingShader.setFloat("light.cutOff",   glm::cos(glm::radians(12.5f)));	
         lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f); 
         lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
         lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
@@ -208,9 +208,7 @@ int main()
 
         // Set materials
         lightingShader.setFloat("material.shininess", 32.0f);
-        // Model & Normal Matrix
-        lightingShader.setMat4("model", model);
-        lightingShader.setMat3("normalMatrix", normalMatrix);
+        
         // Bind diffuse map
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, diffuseMap);
@@ -225,7 +223,8 @@ int main()
             float angle = 20.0f * i;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
             lightingShader.setMat4("model", model);
-
+            glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
+            lightingShader.setMat3("normalMatrix", normalMatrix);
             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         }
     
