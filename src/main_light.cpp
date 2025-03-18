@@ -14,6 +14,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow * window);
+void updateFPS(GLFWwindow* window);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -150,50 +151,66 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    while(!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window)) 
     {
-        float currentFrame = static_cast<float>(glfwGetTime());
+        // Delta time calculations
+        float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
+        updateFPS(window);
         processInput(window);
-
+    
+        // Clear screen
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        lightPos.x = 1.0f + sin(glfwGetTime()) * 2.0f;
-
-        lightingShader.use();
-        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("lightPos", lightPos);
-        
+    
+        // Calculations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)windowedWidth / (float)windowedHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
+        glm::mat4 model = glm::mat4(1.0f);
+        glm::vec3 LightPos = glm::vec3(view * glm::vec4(lightPos, 1.0));
+        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
+        // Set tranformations
+        lightingShader.use();
         lightingShader.setMat4("projection", projection);
         lightingShader.setMat4("view", view);
-        lightingShader.setVec3("viewPos", camera.Position);
-
-        glm::mat4 model = glm::mat4(1.0f);
+        // Set lights
+        lightingShader.setVec3("light.position", LightPos);
+        lightingShader.setVec3("light.ambient", 0.1f, 0.1f, 0.1f);
+        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        lightingShader.setVec3("light.specular", 0.8f, 0.8f, 0.8f);
+        // Set materials
+        lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        lightingShader.setFloat("material.shininess", 32.0f);
+        // Model & Normal Matrix
         lightingShader.setMat4("model", model);
-
+        lightingShader.setMat3("normalMatrix", normalMatrix);
+    
+        // Draw Cube
         glBindVertexArray(cubeVAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
+    
+        // Light Cube Shader
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
+    
+        // Light Source Model Matrix
+        model = glm::translate(glm::mat4(1.0f), lightPos);
         model = glm::scale(model, glm::vec3(0.2f));
         lightCubeShader.setMat4("model", model);
 
+        // Draw Light Cube
         glBindVertexArray(lightCubeVAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
+    
+        // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
-    }
+    }    
 
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteVertexArrays(1, &lightCubeVAO);
@@ -269,4 +286,21 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
+}
+
+
+void updateFPS(GLFWwindow* window) {
+    static float elapsedTime = 0.0f;
+    static int frameCount = 0;
+
+    elapsedTime += deltaTime;
+    frameCount++;
+
+    if (elapsedTime >= 1.0f) {
+        std::string title = "OpenGL - FPS: " + std::to_string(frameCount);
+        glfwSetWindowTitle(window, title.c_str());
+
+        frameCount = 0;
+        elapsedTime = 0.0f;
+    }
 }
