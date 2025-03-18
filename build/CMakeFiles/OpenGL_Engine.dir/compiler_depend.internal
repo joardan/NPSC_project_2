@@ -199,6 +199,7 @@ CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o
  /mnt/Harddisk/GameEngine/Game_Engine/glm/vec4.hpp
  /mnt/Harddisk/GameEngine/Game_Engine/include/camera.h
  /mnt/Harddisk/GameEngine/Game_Engine/include/shader.h
+ /mnt/Harddisk/GameEngine/Game_Engine/include/stb_image.h
  /usr/include/GLFW/glfw3.h
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
@@ -400,6 +401,7 @@ CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o
  /usr/include/c++/14.2.1/pstl/pstl_config.h
  /usr/include/c++/14.2.1/sstream
  /usr/include/c++/14.2.1/stdexcept
+ /usr/include/c++/14.2.1/stdlib.h
  /usr/include/c++/14.2.1/streambuf
  /usr/include/c++/14.2.1/string
  /usr/include/c++/14.2.1/string_view
