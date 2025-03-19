@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 34,
+				"line" : 37,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 37,
+				"line" : 40,
 				"parent" : 0
 			},
 			{
@@ -84,6 +84,14 @@
 				{
 					"backtrace" : 2,
 					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/glm"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/glad"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/shader_functions"
 				}
 			],
 			"language" : "CXX",

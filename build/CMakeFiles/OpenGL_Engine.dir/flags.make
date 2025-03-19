@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glm
+CXX_INCLUDES = -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glm -I/mnt/Harddisk/GameEngine/Game_Engine/glad -I/mnt/Harddisk/GameEngine/Game_Engine/shader_functions
 
 CXX_FLAGS =  -Wall -Wextra -g -std=gnu++17
 

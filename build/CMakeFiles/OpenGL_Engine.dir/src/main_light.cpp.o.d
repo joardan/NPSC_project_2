@@ -324,7 +324,11 @@ CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o: \
  /usr/include/c++/14.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h \
  /mnt/Harddisk/GameEngine/Game_Engine/glm/gtc/type_ptr.inl \
- /mnt/Harddisk/GameEngine/Game_Engine/include/shader.h \
+ /usr/include/assimp/Importer.hpp /usr/include/assimp/types.h \
+ /usr/include/assimp/defs.h /usr/include/assimp/config.h \
+ /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
+ /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
+ /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
  /usr/include/c++/14.2.1/string /usr/include/c++/14.2.1/bits/stringfwd.h \
  /usr/include/c++/14.2.1/bits/char_traits.h \
  /usr/include/c++/14.2.1/bits/postypes.h /usr/include/c++/14.2.1/cwchar \
@@ -348,12 +352,32 @@ CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o: \
  /usr/include/bits/types/error_t.h \
  /usr/include/c++/14.2.1/bits/charconv.h \
  /usr/include/c++/14.2.1/bits/basic_string.tcc \
- /usr/include/c++/14.2.1/fstream /usr/include/c++/14.2.1/istream \
- /usr/include/c++/14.2.1/ios /usr/include/c++/14.2.1/exception \
+ /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
+ /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
+ /usr/include/c++/14.2.1/algorithm \
+ /usr/include/c++/14.2.1/bits/stl_algo.h \
+ /usr/include/c++/14.2.1/bits/algorithmfwd.h \
+ /usr/include/c++/14.2.1/bits/stl_heap.h \
+ /usr/include/c++/14.2.1/bits/uniform_int_dist.h \
+ /usr/include/c++/14.2.1/bits/stl_tempbuf.h \
+ /usr/include/c++/14.2.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/14.2.1/pstl/execution_defs.h \
+ /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
+ /usr/include/assimp/quaternion.inl /usr/include/c++/14.2.1/exception \
  /usr/include/c++/14.2.1/bits/exception_ptr.h \
  /usr/include/c++/14.2.1/bits/cxxabi_init_exception.h \
  /usr/include/c++/14.2.1/bits/nested_exception.h \
- /usr/include/c++/14.2.1/bits/ios_base.h \
+ /usr/include/assimp/scene.h /usr/include/assimp/texture.h \
+ /usr/include/assimp/Compiler/pushpack1.h \
+ /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/mesh.h \
+ /usr/include/assimp/aabb.h /usr/include/c++/14.2.1/unordered_set \
+ /usr/include/c++/14.2.1/bits/unordered_set.h /usr/include/assimp/light.h \
+ /usr/include/assimp/camera.h /usr/include/assimp/material.h \
+ /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
+ /usr/include/assimp/metadata.h /usr/include/assimp/postprocess.h \
+ /mnt/Harddisk/GameEngine/Game_Engine/include/shader.h \
+ /usr/include/c++/14.2.1/fstream /usr/include/c++/14.2.1/istream \
+ /usr/include/c++/14.2.1/ios /usr/include/c++/14.2.1/bits/ios_base.h \
  /usr/include/c++/14.2.1/ext/atomicity.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/gthr.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/gthr-default.h \
