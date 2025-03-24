@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad.h>
+#include <glad/glad.h>
 #include <gtc/matrix_transform.hpp>
 
 #include <shader.h>

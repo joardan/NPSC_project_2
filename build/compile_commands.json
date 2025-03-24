@@ -1,19 +1,19 @@
 [
 {
   "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
-  "command": "/usr/bin/gcc  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -g -o CMakeFiles/glad.dir/glad/src/glad.c.o -c /mnt/Harddisk/GameEngine/Game_Engine/glad/src/glad.c",
+  "command": "/usr/bin/gcc -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -g -o CMakeFiles/glad.dir/glad/src/glad.c.o -c /mnt/Harddisk/GameEngine/Game_Engine/glad/src/glad.c",
   "file": "/mnt/Harddisk/GameEngine/Game_Engine/glad/src/glad.c",
   "output": "CMakeFiles/glad.dir/glad/src/glad.c.o"
 },
 {
   "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
-  "command": "/usr/bin/g++  -I/mnt/Harddisk/GameEngine/Game_Engine/include  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/stb_image.dir/src/stb_image.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/stb_image.cpp",
+  "command": "/usr/bin/g++ -I/mnt/Harddisk/GameEngine/Game_Engine/include  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/stb_image.dir/src/stb_image.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/stb_image.cpp",
   "file": "/mnt/Harddisk/GameEngine/Game_Engine/src/stb_image.cpp",
   "output": "CMakeFiles/stb_image.dir/src/stb_image.cpp.o"
 },
 {
   "directory": "/mnt/Harddisk/GameEngine/Game_Engine/build",
-  "command": "/usr/bin/g++  -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glm -I/mnt/Harddisk/GameEngine/Game_Engine/glad -I/mnt/Harddisk/GameEngine/Game_Engine/shader_functions  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp",
+  "command": "/usr/bin/g++ -I/mnt/Harddisk/GameEngine/Game_Engine/glm -I/mnt/Harddisk/GameEngine/Game_Engine/include -I/mnt/Harddisk/GameEngine/Game_Engine/glad/include  -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -c /mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp",
   "file": "/mnt/Harddisk/GameEngine/Game_Engine/src/main_light.cpp",
   "output": "CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o"
 }
