@@ -24,7 +24,7 @@ target_include_directories(stb_image PUBLIC include)
 # Add the executable main.cpp
 #add_executable(OpenGL_Engine src/main.cpp)
 # Add the executable main_light.cpp
-add_executable(OpenGL_Engine src/main_model_light.cpp)
+add_executable(OpenGL_Engine src/cubemap_r.cpp)
 
 target_include_directories(OpenGL_Engine PRIVATE glm include)
 # Link libraries

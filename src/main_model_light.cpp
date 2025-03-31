@@ -266,7 +266,7 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
     
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        deltaTime *= 2.5f;
+        deltaTime *= 3.5f;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -300,8 +300,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
+    float mouse_sensitivity = 0.2f;
     if (!cameraEnabled) return;
 
     float xpos = static_cast<float>(xposIn);
@@ -314,8 +316,8 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
         firstMouse = false;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float xoffset = (xpos - lastX) * mouse_sensitivity;
+    float yoffset = (lastY - ypos) * mouse_sensitivity; // reversed since y-coordinates go from bottom to top
 
     lastX = xpos;
     lastY = ypos;

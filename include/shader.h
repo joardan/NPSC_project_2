@@ -137,12 +137,8 @@ class Shader
                 glGetProgramiv(shader, GL_LINK_STATUS, &success);
                 if(!success)
                 {
-                    glGetProgramiv(shader, GL_LINK_STATUS, &success);
-                    if(!success)
-                    {
                         glGetProgramInfoLog(shader, 1024, NULL, infoLog);
                         std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-                    }
                 }
             }
         }
