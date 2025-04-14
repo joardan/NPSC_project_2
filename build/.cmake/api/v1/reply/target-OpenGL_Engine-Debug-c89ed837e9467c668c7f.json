@@ -129,10 +129,6 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
-				"role" : "flags"
-			},
-			{
 				"backtrace" : 2,
 				"fragment" : "/usr/lib/libglfw.so.3.4",
 				"role" : "libraries"

@@ -147,7 +147,7 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    Model ourModel("/mnt/Harddisk/GameEngine/Game_Engine/resources/objects/backpack/backpack.obj");
+    Model ourModel("/mnt/Harddisk/GameEngine/Game_Engine/resources/objects/objects/nanosuit/nanosuit.obj");
 
     while (!glfwWindowShouldClose(window)) 
     {

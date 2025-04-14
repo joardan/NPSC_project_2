@@ -9,10 +9,11 @@
 #include <shader.h>
 #include <camera.h>
 #include <model.h>
+#include <sphere.h>
 
 #include <iostream>
 
-#define NR_POINT_LIGHTS 4
+#define NR_POINT_LIGHTS 1
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -22,7 +23,7 @@ void updateFPS(GLFWwindow* window);
 unsigned int loadTexture(char const * path);
 unsigned int loadCubemap(std::vector<std::string> faces);
 
-Camera camera(glm::vec3(0.0f, 0.0f, 8.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 30.0f));
 
 bool firstMouse = true;
 bool cameraEnabled = true;
@@ -35,10 +36,11 @@ float lastFrame = 0.0f;
 int main()
 {
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
@@ -68,11 +70,14 @@ int main()
     }
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_MULTISAMPLE);  
+    camera.MovementSpeed *= 10;
 
-    Shader lightCubeShader("../shaders/structured.light.cube.shader.vs", "../shaders/light.cube.shader.fs");
-    Shader skyboxShader("../shaders/structured.skybox.vs", "../shaders/6.1.skybox.fs");
-    Shader asteroidShader("../shaders/instanced.object.model.shader.vs", "../shaders/instanced.object.model.shader.fs");
-    Shader planetShader("../shaders/structured.object.model.shader.vs", "../shaders/instanced.object.model.shader.fs");
+    Shader lightCubeShader("../shaders.2/structured.light.cube.shader.vs", "../shaders.2/light.cube.shader.fs");
+    Shader skyboxShader("../shaders.2/structured.skybox.vs", "../shaders.2/6.1.skybox.fs");
+    Shader asteroidShader("../shaders.2/instanced.object.model.shader.vs", "../shaders.2/instanced.object.model.shader.fs");
+    Shader planetShader("../shaders.2/structured.object.model.shader.vs", "../shaders.2/instanced.object.model.shader.fs");
 
     float cubeVertices[] = {
         // positions          // normals
@@ -165,10 +170,7 @@ int main()
     };
 
     glm::vec3 pointLightPositions[] = {
-        glm::vec3( 0.7f,  0.2f,  2.0f),
-        glm::vec3( 2.3f, -3.3f, -4.0f),
-        glm::vec3(-4.0f,  2.0f, -12.0f),
-        glm::vec3( 0.0f,  0.0f, -3.0f)
+        glm::vec3( 10.0f,  0.2f,  20.0f),
     };
 
     // cube light VAO
@@ -201,11 +203,13 @@ int main()
         "../textures/space_skybox/GalaxyTex_NegativeZ.png"
     };
     unsigned int cubemapTexture = loadCubemap(faces);
+    stbi_set_flip_vertically_on_load(true);
 
     Model planet("../resources/objects/planet/planet.obj");
     Model rock("../resources/objects/rock/rock.obj");
+    Mesh sphereMesh = SphereCreator::CreateSphere(1.0f, 36, 18);
     
-    unsigned int amount = 1000;
+    unsigned int amount = 100000;
     glm::mat4* modelMatrices;
     glm::mat3* normalMatrices;
     normalMatrices = new glm::mat3[amount];
@@ -322,10 +326,11 @@ int main()
     };
     
     struct PointLight {
-        glm::vec3 position;
+        glm::vec4 position;
         float constant;
         float linear;
         float quadratic;
+        float padding0;
         glm::vec3 ambient;
         float padding1;
         glm::vec3 diffuse;
@@ -367,28 +372,28 @@ int main()
     lighting.material.shininess = 32.0f;
 
     // Directional Light
-    lighting.dirLight.direction = glm::vec3(-0.2f, -1.0f, -0.3f);
+    lighting.dirLight.direction = glm::vec3(0.0f, 0.0f, -1.0f);
     lighting.dirLight.ambient = glm::vec3(0.1f);
-    lighting.dirLight.diffuse = glm::vec3(0.4f);
-    lighting.dirLight.specular = glm::vec3(0.5f);
+    lighting.dirLight.diffuse = glm::vec3(0.6f);
+    lighting.dirLight.specular = glm::vec3(0.8f);
 
     // Point Lights
     for (int i = 0; i < NR_POINT_LIGHTS; i++) {
-        lighting.pointLights[i].position = glm::vec3(i, 1.0f, i);
+        lighting.pointLights[i].position = glm::vec4(pointLightPositions[i], 1.0);
         lighting.pointLights[i].constant = 1.0f;
-        lighting.pointLights[i].linear = 0.09f;
-        lighting.pointLights[i].quadratic = 0.032f;
+        lighting.pointLights[i].linear = 0.009f;
+        lighting.pointLights[i].quadratic = 0.012f;
         lighting.pointLights[i].ambient = glm::vec3(0.05f);
         lighting.pointLights[i].diffuse = glm::vec3(0.8f);
         lighting.pointLights[i].specular = glm::vec3(1.0f);
     }
 
     // SpotLight
-    lighting.spotLight.cutOff = glm::cos(glm::radians(55.0f));
-    lighting.spotLight.outerCutOff = glm::cos(glm::radians(60.0f));
+    lighting.spotLight.cutOff = glm::cos(glm::radians(12.5f));
+    lighting.spotLight.outerCutOff = glm::cos(glm::radians(15.0f));
     lighting.spotLight.constant = 1.0f;
-    lighting.spotLight.linear = 0.09f;
-    lighting.spotLight.quadratic = 0.032f;
+    lighting.spotLight.linear = 0.005f;
+    lighting.spotLight.quadratic = 0.003f;
     lighting.spotLight.ambient = glm::vec3(0.0f);
     lighting.spotLight.diffuse = glm::vec3(1.0f);
     lighting.spotLight.specular = glm::vec3(1.0f);
@@ -429,13 +434,18 @@ int main()
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f));
         model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+        float angle = glfwGetTime() * 0.05f;
+        // Create a model matrix and apply rotation around the desired axis (here, the Y axis)
+        model = glm::rotate(model, angle, glm::vec3(0.1f, 0.8f, 0.0f));
         planetShader.setMat4("model", model);
         glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
         planetShader.setMat3("normalMatrix", normalMatrix);
+        planetShader.setMat4("viewMat", view);
         planet.Draw(planetShader);
         
         asteroidShader.use();
         asteroidShader.setInt("texture_diffuse1", 0);
+        asteroidShader.setMat4("viewMat", view);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, rock.textures_loaded[0].id);
         for (unsigned int i = 0; i < rock.meshes.size(); i++)
@@ -457,6 +467,11 @@ int main()
             lightCubeShader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 800.0f));
+        model = glm::scale(model, glm::vec3(100.0f));
+        lightCubeShader.setMat4("model", model);
+        sphereMesh.Draw(lightCubeShader);
 
         glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
         skyboxShader.use();
