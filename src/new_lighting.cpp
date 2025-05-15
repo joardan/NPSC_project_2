@@ -20,7 +20,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow * window);
 void updateFPS(GLFWwindow* window);
-unsigned int loadTexture(char const * path);
+unsigned int loadTexture(char const * path, bool gammaCorrection);
 unsigned int loadCubemap(std::vector<std::string> faces);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 30.0f));
@@ -76,8 +76,8 @@ int main()
 
     Shader lightCubeShader("../shaders.2/structured.light.cube.shader.vs", "../shaders.2/light.cube.shader.fs");
     Shader skyboxShader("../shaders.2/structured.skybox.vs", "../shaders.2/6.1.skybox.fs");
-    Shader asteroidShader("../shaders.2/instanced.object.model.shader.vs", "../shaders.2/instanced.object.model.shader.fs");
-    Shader planetShader("../shaders.2/structured.object.model.shader.vs", "../shaders.2/instanced.object.model.shader.fs");
+    Shader asteroidShader("../shaders.2/instanced.object.model.shader.vs", "../shaders.2/2.instanced.object.model.shader.fs");
+    Shader planetShader("../shaders.2/structured.object.model.shader.vs", "../shaders.2/2.instanced.object.model.shader.fs");
 
     float cubeVertices[] = {
         // positions          // normals
@@ -205,8 +205,8 @@ int main()
     unsigned int cubemapTexture = loadCubemap(faces);
     stbi_set_flip_vertically_on_load(true);
 
-    Model planet("../resources/objects/planet/planet.obj");
-    Model rock("../resources/objects/rock/rock.obj");
+    Model planet("../resources/objects/planet/planet.obj", true);
+    Model rock("../resources/objects/rock/rock.obj", true);
     Mesh sphereMesh = SphereCreator::CreateSphere(1.0f, 36, 18);
     
     unsigned int amount = 100000;
@@ -273,7 +273,7 @@ int main()
     unsigned int normalBuffer;
     glGenBuffers(1, &normalBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
-    glBufferData(GL_ARRAY_BUFFER, amount * sizeof(glm::mat3), normalMatrices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, amount * sizeof(glm::mat3), &normalMatrices[0], GL_STATIC_DRAW);
 
     for (unsigned int i = 0; i < rock.meshes.size(); i++)
     {
@@ -369,13 +369,13 @@ int main()
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     LightData lighting;
-    lighting.material.shininess = 32.0f;
+    lighting.material.shininess = 64.0f;
 
     // Directional Light
     lighting.dirLight.direction = glm::vec3(0.0f, 0.0f, -1.0f);
-    lighting.dirLight.ambient = glm::vec3(0.1f);
-    lighting.dirLight.diffuse = glm::vec3(0.6f);
-    lighting.dirLight.specular = glm::vec3(0.8f);
+    lighting.dirLight.ambient = glm::vec3(0.01f);
+    lighting.dirLight.diffuse = glm::vec3(0.4f);
+    lighting.dirLight.specular = glm::vec3(1.0f);
 
     // Point Lights
     for (int i = 0; i < NR_POINT_LIGHTS; i++) {
@@ -383,9 +383,9 @@ int main()
         lighting.pointLights[i].constant = 1.0f;
         lighting.pointLights[i].linear = 0.009f;
         lighting.pointLights[i].quadratic = 0.012f;
-        lighting.pointLights[i].ambient = glm::vec3(0.05f);
-        lighting.pointLights[i].diffuse = glm::vec3(0.8f);
-        lighting.pointLights[i].specular = glm::vec3(1.0f);
+        lighting.pointLights[i].ambient = glm::vec3(0.01f);
+        lighting.pointLights[i].diffuse = glm::vec3(0.005f);
+        lighting.pointLights[i].specular = glm::vec3(0.1f);
     }
 
     // SpotLight
@@ -395,7 +395,7 @@ int main()
     lighting.spotLight.linear = 0.005f;
     lighting.spotLight.quadratic = 0.003f;
     lighting.spotLight.ambient = glm::vec3(0.0f);
-    lighting.spotLight.diffuse = glm::vec3(1.0f);
+    lighting.spotLight.diffuse = glm::vec3(0.04f);
     lighting.spotLight.specular = glm::vec3(1.0f);
 
     // Upload to UBO
@@ -408,6 +408,10 @@ int main()
 
     skyboxShader.use();
     skyboxShader.setInt("skybox", 0);
+    planetShader.use();
+    planetShader.setBool("gamma", true);
+    asteroidShader.use();
+    asteroidShader.setBool("gamma", true);
 
     while (!glfwWindowShouldClose(window)) 
     {
@@ -579,28 +583,37 @@ void updateFPS(GLFWwindow* window) {
     }
 }
 
-unsigned int loadTexture(char const * path)
+unsigned int loadTexture(char const * path, bool gammaCorrection)
 {
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
+    unsigned char *data = stbi_load(path, &width, &height, &nrComponents, 0);
     if (data)
     {
-        GLenum format;
+        GLenum internalFormat;
+        GLenum dataFormat;
         if (nrComponents == 1)
-            format = GL_RED;
+        {
+            internalFormat = dataFormat = GL_RED;
+        }
         else if (nrComponents == 3)
-            format = GL_RGB;
+        {
+            internalFormat = gammaCorrection ? GL_SRGB : GL_RGB;
+            dataFormat = GL_RGB;
+        }
         else if (nrComponents == 4)
-            format = GL_RGBA;
-        
+        {
+            internalFormat = gammaCorrection ? GL_SRGB_ALPHA : GL_RGBA;
+            dataFormat = GL_RGBA;
+        }
+
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

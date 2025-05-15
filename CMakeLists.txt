@@ -21,11 +21,25 @@ target_include_directories(glad PUBLIC glad/include)
 add_library(stb_image STATIC src/stb_image.cpp)
 target_include_directories(stb_image PUBLIC include)
 
+add_library(imgui
+    imgui/imgui.cpp
+    imgui/imgui_draw.cpp
+    imgui/imgui_widgets.cpp
+    imgui/imgui_tables.cpp
+    imgui/backends/imgui_impl_glfw.cpp
+    imgui/backends/imgui_impl_opengl3.cpp
+)
+
+target_include_directories(imgui PUBLIC
+    imgui
+    imgui/backends
+)
+
 # Add the executable main.cpp
 #add_executable(OpenGL_Engine src/main.cpp)
 # Add the executable main_light.cpp
-add_executable(OpenGL_Engine src/instanced.cpp)
+add_executable(OpenGL_Engine src/simulation.cpp)
 
 target_include_directories(OpenGL_Engine PRIVATE glm include)
 # Link libraries
-target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL glad stb_image assimp)
+target_link_libraries(OpenGL_Engine PRIVATE glfw OpenGL::GL imgui glad stb_image assimp)
