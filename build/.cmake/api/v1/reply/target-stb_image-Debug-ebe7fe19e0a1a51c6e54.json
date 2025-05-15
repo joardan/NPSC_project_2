@@ -50,7 +50,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/include"
+					"path" : "/mnt/Harddisk/GameEngine/Physic_Engine/include"
 				}
 			],
 			"language" : "CXX",

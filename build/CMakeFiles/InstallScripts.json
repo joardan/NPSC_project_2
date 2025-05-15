@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/mnt/Harddisk/GameEngine/Game_Engine/build/cmake_install.cmake"
+		"/mnt/Harddisk/GameEngine/Physic_Engine/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

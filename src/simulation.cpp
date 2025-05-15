@@ -9,21 +9,20 @@
 
 #include <shader.h>
 #include <camera.h>
-#include <model.h>    // Should include mesh.h
-#include <sphere.h>   // For SphereCreator
+#include <model.h>
+#include <sphere.h>
 
 #include <iostream>
 #include <vector>
 #include <string>
-#include <random>     // For C++11 random number generation
+#include <random>
 #include <iomanip>    // For std::fixed and std::setprecision in updateFPS
 
-// ImGui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-#define NR_POINT_LIGHTS 1 // Sun will be the point light
+#define NR_POINT_LIGHTS 1
 
 void framebuffer_size_callback([[maybe_unused]] GLFWwindow* window, int width, int height);
 void mouse_callback([[maybe_unused]] GLFWwindow* window, double xpos, double ypos);
@@ -32,7 +31,7 @@ void processInput(GLFWwindow* window);
 void updateFPS(GLFWwindow* window);
 unsigned int loadTexture(char const* path, bool gammaCorrection);
 unsigned int loadCubemap(std::vector<std::string> faces);
-void resetSimulation(); // Forward declaration
+void resetSimulation();
 
 // Camera
 Camera camera(glm::vec3(0.0f, 20.0f, 150.0f));
@@ -70,13 +69,12 @@ struct CelestialBody {
                   bool stat = false, bool asteroid = false, int t = 2)
         : position(pos),
           velocity(vel),
-          acceleration(0.0f), // Initialize here
+          acceleration(0.0f),
           mass(m),
           radiusScale(rScale),
           modelPtr(mod),
           meshPtr(mesh),
           orientation(orient),
-          // modelMatrix initialized by updateModelMatrix()
           isStatic(stat),
           isAsteroid(asteroid),
           type(t)
@@ -104,7 +102,7 @@ struct CelestialBody {
     void updateModelMatrix() {
         glm::mat4 trans = glm::translate(glm::mat4(1.0f), position);
         glm::mat4 rot = glm::mat4_cast(orientation);
-        glm::mat4 scale_mat = glm::scale(glm::mat4(1.0f), glm::vec3(radiusScale)); // Renamed to avoid conflict
+        glm::mat4 scale_mat = glm::scale(glm::mat4(1.0f), glm::vec3(radiusScale));
         modelMatrix = trans * rot * scale_mat;
     }
 };
@@ -112,7 +110,7 @@ struct CelestialBody {
 std::vector<CelestialBody> celestialBodies;
 Model* planetModelPtr = nullptr;
 Model* rockModelPtr = nullptr;
-Mesh sphereMesh; // For the sun - REQUIRES Mesh TO HAVE A DEFAULT CONSTRUCTOR (see notes above)
+Mesh sphereMesh; // For the sun - REQUIRES Mesh TO HAVE A DEFAULT CONSTRUCTOR
 
 unsigned int asteroidAmount = 0;
 glm::mat4* asteroidModelMatrices = nullptr;
@@ -124,8 +122,8 @@ float sunMass = 20000.0f;
 float sunRadiusScale = 15.0f;
 
 float planetMass = 200.0f;
-float planetRadiusScale = 4.0f;
-float planetOrbitRadius = 70.0f;
+float planetRadiusScale = 1.0f;
+float planetOrbitRadius = 200.0f;
 float planetInitialAngle = 0.0f;
 
 float avgAsteroidMass = 0.1f;
@@ -141,12 +139,10 @@ bool pauseSimulation = false;
 void initializeCelestialBodies() {
     celestialBodies.clear();
 
-    // Sun
     glm::vec3 sunPos(0.0f, 0.0f, 0.0f);
     glm::vec3 sunVel(0.0f, 0.0f, 0.0f);
-    celestialBodies.emplace_back(sunPos, sunVel, sunMass, sunRadiusScale, nullptr, &sphereMesh, glm::quat(1.0f,0,0,0), false, false, 0);
 
-    // Planet
+    celestialBodies.emplace_back(sunPos, sunVel, sunMass, sunRadiusScale, nullptr, &sphereMesh, glm::quat(1.0f,0,0,0), false, false, 0);
     float angleRad = glm::radians(planetInitialAngle);
     glm::vec3 planetPos(planetOrbitRadius * cos(angleRad), 0.0f, planetOrbitRadius * sin(angleRad));
     float orbitalVelMag = (sunMass > 0 && planetOrbitRadius > 0) ? sqrt((G_scaled * sunMass) / planetOrbitRadius) : 0.0f;
@@ -189,7 +185,7 @@ void initializeCelestialBodies() {
         float currentAsteroidMass = avgAsteroidMass * distribMassFactor(rng);
         float currentAsteroidScale = distribScale(rng);
         
-        glm::vec3 randomAxis = glm::normalize(glm::vec3(distribRot(rng) + 0.1f, distribRot(rng) + 0.1f, distribRot(rng) + 0.1f)); // Ensure not zero vector
+        glm::vec3 randomAxis = glm::normalize(glm::vec3(distribRot(rng) + 0.1f, distribRot(rng) + 0.1f, distribRot(rng) + 0.1f));
         glm::quat orientation = glm::angleAxis(glm::radians(distribRot(rng)), randomAxis);
 
         celestialBodies.emplace_back(pos, vel, currentAsteroidMass, currentAsteroidScale, rockModelPtr, nullptr, orientation, false, true, 2);
@@ -200,7 +196,7 @@ void updatePhysics(float dt) {
     if (pauseSimulation) return;
 
     dt *= simulationSpeed;
-    if (dt == 0.0f) return; // No time passed, no update
+    if (dt == 0.0f) return;
 
     for (size_t i = 0; i < celestialBodies.size(); ++i) {
         if (celestialBodies[i].isStatic) continue;
@@ -227,7 +223,7 @@ void updatePhysics(float dt) {
         }
     }
 
-    unsigned int asteroidInstanceIdx = 0; // Changed to unsigned int
+    unsigned int asteroidInstanceIdx = 0;
     for (size_t i = 0; i < celestialBodies.size(); ++i) {
         celestialBodies[i].update(dt);
         if (celestialBodies[i].isAsteroid && asteroidInstanceIdx < asteroidAmount) {
@@ -400,13 +396,13 @@ int main()
     LightData lighting;
     lighting.material.shininess = 32.0f;
     lighting.dirLight.direction = glm::vec3(-0.2f, -1.0f, -0.3f);
-    lighting.dirLight.ambient = glm::vec3(0.02f);
-    lighting.dirLight.diffuse = glm::vec3(0.1f);
-    lighting.dirLight.specular = glm::vec3(0.1f);
+    lighting.dirLight.ambient = glm::vec3(0.0f); //glm::vec3(0.02f);
+    lighting.dirLight.diffuse = glm::vec3(0.0f); //glm::vec3(0.1f);
+    lighting.dirLight.specular = glm::vec3(0.0f); //glm::vec3(0.1f);
 
     lighting.pointLights[0].constant = 1.0f;
     lighting.pointLights[0].linear = 0.0007f; // Adjusted for larger scales, might need tuning
-    lighting.pointLights[0].quadratic = 0.000002f; // Adjusted
+    lighting.pointLights[0].quadratic = 0.000002f;
     lighting.pointLights[0].ambient = glm::vec3(0.1f, 0.1f, 0.1f);
     lighting.pointLights[0].diffuse = glm::vec3(1.0f, 0.95f, 0.8f); // Sun-like color
     lighting.pointLights[0].specular = glm::vec3(1.0f);
@@ -423,12 +419,11 @@ int main()
     lighting.spotLight.diffuse_spot = glm::vec3(0.8f);
     lighting.spotLight.specular_spot = glm::vec3(0.5f);
 
-
     skyboxShader.use(); skyboxShader.setInt("skybox", 0);
     objectShader.use(); objectShader.setBool("gamma", true); // Assuming shaders handle gamma
-    asteroidShader.use(); asteroidShader.setBool("gamma", true); asteroidShader.setInt("texture_diffuse1", 0);
+    asteroidShader.use(); asteroidShader.setBool("gamma", true); //asteroidShader.setInt("texture_diffuse1", 0);
 
-
+    float lastFrame = static_cast<float>(glfwGetTime());
     while (!glfwWindowShouldClose(window)) {
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
@@ -436,7 +431,12 @@ int main()
 
         glfwPollEvents(); // Poll events early
         processInput(window); // Process input after polling
-
+        ImGuiIO& io = ImGui::GetIO();
+        if (cameraEnabled) {
+            io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
+        } else {
+            io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
+        }
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -465,7 +465,7 @@ int main()
              ImGui::SliderFloat("Planet Initial Angle", &planetInitialAngle, 0.0f, 360.0f);
         }
         if (ImGui::CollapsingHeader("Asteroid Properties")) {
-            bool asteroidAmountChanged = ImGui::SliderInt("Asteroid Count", (int*)&asteroidAmount, 0, 20000); // Reduced max for stability
+            bool asteroidAmountChanged = ImGui::SliderInt("Asteroid Count", (int*)&asteroidAmount, 0, 5000); // Reduced max for stability
             ImGui::SliderFloat("Avg. Asteroid Mass", &avgAsteroidMass, 0.001f, 1.0f, "%.3f");
             ImGui::SliderFloat("Min Asteroid Scale", &minAsteroidScale, 0.01f, 0.5f);
             ImGui::SliderFloat("Max Asteroid Scale", &maxAsteroidScale, 0.05f, 1.0f);
@@ -518,7 +518,6 @@ int main()
         // Planet
         if (celestialBodies.size() > 1 && planetModelPtr) {
              objectShader.use();
-             objectShader.setMat4("viewMat", view); // Assuming shader takes separate view for non-UBO path
              objectShader.setVec3("viewPos", camera.Position);
              objectShader.setMat4("model", celestialBodies[1].modelMatrix);
              objectShader.setMat3("normalMatrix", glm::transpose(glm::inverse(glm::mat3(celestialBodies[1].modelMatrix))));

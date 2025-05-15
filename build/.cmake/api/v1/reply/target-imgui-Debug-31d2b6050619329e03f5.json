@@ -50,11 +50,11 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/imgui"
+					"path" : "/mnt/Harddisk/GameEngine/Physic_Engine/imgui"
 				},
 				{
 					"backtrace" : 2,
-					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/imgui/backends"
+					"path" : "/mnt/Harddisk/GameEngine/Physic_Engine/imgui/backends"
 				}
 			],
 			"language" : "CXX",

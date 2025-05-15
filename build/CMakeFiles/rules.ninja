@@ -101,7 +101,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/mnt/Harddisk/GameEngine/Game_Engine -B/mnt/Harddisk/GameEngine/Game_Engine/build
+  command = /usr/bin/cmake --regenerate-during-build -S/mnt/Harddisk/GameEngine/Physic_Engine -B/mnt/Harddisk/GameEngine/Physic_Engine/build
   description = Re-running CMake...
   generator = 1
 

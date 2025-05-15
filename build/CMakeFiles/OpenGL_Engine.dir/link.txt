@@ -1,1 +1,0 @@
-/usr/bin/g++  -Wall -Wextra -g -Wl,--dependency-file=CMakeFiles/OpenGL_Engine.dir/link.d CMakeFiles/OpenGL_Engine.dir/src/main_light.cpp.o -o OpenGL_Engine  /usr/lib/libglfw.so.3.4 libglad.a libstb_image.a /usr/lib/libGLX.so /usr/lib/libOpenGL.so

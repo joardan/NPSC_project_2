@@ -50,7 +50,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/mnt/Harddisk/GameEngine/Game_Engine/glad/include"
+					"path" : "/mnt/Harddisk/GameEngine/Physic_Engine/glad/include"
 				}
 			],
 			"language" : "C",
